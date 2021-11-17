@@ -1,6 +1,6 @@
 const express = require('express') //모듈 import
 const app = express() //function을 사용하여 app 만들기
-const port = 5000 //임의의값 사용가능
+const port = 3000 //임의의값 사용가능
 const bodyParser = require('body-parser');
 const {User} = require('./models/user');
 
@@ -13,7 +13,7 @@ app.use(bodyParser.json()) //json 데이터를 가져오기 위함
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoURI,{
 
-}).then(()=>console.log('connect ok~!'))
+}).then(()=>console.log('db connect ok'))
   .catch(err=> console.log(err))
   
 app.get('/', (req, res) => {  // '/'는 루트 디렉토리, hello world 출력 
@@ -29,12 +29,12 @@ app.post('/register',(req,res)=> { //post 기능구현
   user.save((err,userInfo)=>{
     if(err) return res.json({success:false,err})
     return res.status(200).json({
-      success:true
+      success:true  
     })
   })
 })
 
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening on port :${port}!`)
 })
