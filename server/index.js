@@ -2,10 +2,10 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const config = require('./config/key');
+const config = require('./config/key'); 
 const { auth } = require("./middleware/auth"); 
 const { User } = require("./models/User");
-const port = 3000;
+const port = 5000;
 
 app.use(bodyParser.urlencoded({extended:true})); //encoded된 데이터를 가져오기 위함
 
@@ -84,13 +84,18 @@ app.get('/api/users/auth', auth, (req, res) =>{
 app.get('/api/users/logout', auth, (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id },
     { token: "" }
-    , (err, user) => {
+    , (err, user) => { 
       if (err) return res.json({ success: false, err });
       return res.status(200).send({
         success: true
       })
     })
 })
+
+app.get('/api/hello',(req,res)=>{
+  res.send('proxy 통신')
+})
+
 
 
 app.listen(port, () => {
