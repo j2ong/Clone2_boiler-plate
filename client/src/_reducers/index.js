@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import user from './user_reducer';
 
 const rootReducer = combineReducers({
-    user //현재는 user_reducer의 reducer만 combine 한 상태
+   user
 })
 
 export default rootReducer;
